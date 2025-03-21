@@ -50,6 +50,9 @@ E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\Micro
 E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\Mono.TextTemplating.dll
 E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\Newtonsoft.Json.dll
 E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\System.ClientModel.dll
 E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\System.CodeDom.dll
 E:\personal project\pacifickode\Company\CompanyManagement\bin\Debug\net9.0\System.Composition.AttributedModel.dll
@@ -151,6 +154,7 @@ E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\Compa
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\CompanyManagement.csproj.CoreCompileInputs.cache
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\CompanyManagement.MvcApplicationPartsAssemblyInfo.cs
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\CompanyManagement.MvcApplicationPartsAssemblyInfo.cache
+E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\CompanyManagement.sourcelink.json
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\scopedcss\bundle\CompanyManagement.styles.css
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\staticwebassets.build.json
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\staticwebassets.development.json
@@ -167,4 +171,3 @@ E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\refin
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\CompanyManagement.pdb
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\CompanyManagement.genruntimeconfig.cache
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\ref\CompanyManagement.dll
-E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

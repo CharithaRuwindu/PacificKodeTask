@@ -1,42 +1,87 @@
-﻿using CompanyManagement.Models;
-using CompanyManagement.Repositories;
+﻿using CompanyManagement.Data;
+using CompanyManagement.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CompanyManagement.Controllers
 {
-    [Route("api/departments")]
+    [Route("api/[controller]")]
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly DepartmentRepository _repository;
+        private readonly ApplicationDbContext _context;
 
-        public DepartmentController(DepartmentRepository repository)
+        public DepartmentController(ApplicationDbContext context)
         {
-            _repository = repository;
+            _context = context;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDepartment([FromBody] Department department)
+        {
+            if (department == null)
+                return BadRequest("Invalid data.");
+
+            if (await _context.Departments.AnyAsync(d => d.DepartmentCode == department.DepartmentCode))
+                return Conflict("Department Code already exists.");
+
+            if (await _context.Departments.AnyAsync(d => d.DepartmentName == department.DepartmentName))
+                return Conflict("Department Name already exists.");
+
+            department.Id = Guid.NewGuid();
+
+            _context.Departments.Add(department);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetDepartmentById), new { id = department.Id }, department);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDepartmentById(Guid id)
+        {
+            var department = await _context.Departments.FindAsync(id);
+            if (department == null)
+                return NotFound();
+
+            return Ok(department);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDepartments() => Ok(await _repository.GetDepartmentsAsync());
-
-        [HttpPost]
-        public async Task<IActionResult> AddDepartment([FromBody] Department department)
+        public async Task<IActionResult> GetAllDepartments()
         {
-            await _repository.AddDepartmentAsync(department);
-            return Ok(new { message = "Department added successfully." });
+            var departments = await _context.Departments.ToListAsync();
+            return Ok(departments);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateDepartment([FromBody] Department department)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateDepartment(Guid id, [FromBody] Department updatedDepartment)
         {
-            await _repository.UpdateDepartmentAsync(department);
-            return Ok(new { message = "Department updated successfully." });
+            var existingDepartment = await _context.Departments.FindAsync(id);
+            if (existingDepartment == null)
+                return NotFound();
+
+            if (await _context.Departments.AnyAsync(d => d.DepartmentCode == updatedDepartment.DepartmentCode && d.Id != id))
+                return Conflict("Department Code already exists.");
+
+            if (await _context.Departments.AnyAsync(d => d.DepartmentName == updatedDepartment.DepartmentName && d.Id != id))
+                return Conflict("Department Name already exists.");
+
+            existingDepartment.DepartmentCode = updatedDepartment.DepartmentCode;
+            existingDepartment.DepartmentName = updatedDepartment.DepartmentName;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDepartment(int id)
+        public async Task<IActionResult> DeleteDepartment(Guid id)
         {
-            await _repository.DeleteDepartmentAsync(id);
-            return Ok(new { message = "Department deleted successfully." });
+            var department = await _context.Departments.FindAsync(id);
+            if (department == null)
+                return NotFound();
+
+            _context.Departments.Remove(department);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

@@ -2,7 +2,7 @@
   {
     "ContainingType": "CompanyManagement.Controllers.DepartmentController",
     "Method": "GetDepartments",
-    "RelativePath": "api/departments",
+    "RelativePath": "api/Department",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -11,8 +11,8 @@
   },
   {
     "ContainingType": "CompanyManagement.Controllers.DepartmentController",
-    "Method": "AddDepartment",
-    "RelativePath": "api/departments",
+    "Method": "CreateDepartment",
+    "RelativePath": "api/Department",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -27,12 +27,33 @@
   },
   {
     "ContainingType": "CompanyManagement.Controllers.DepartmentController",
+    "Method": "GetDepartmentById",
+    "RelativePath": "api/Department/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CompanyManagement.Controllers.DepartmentController",
     "Method": "UpdateDepartment",
-    "RelativePath": "api/departments",
+    "RelativePath": "api/Department/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
       {
         "Name": "department",
         "Type": "CompanyManagement.Models.Department",
@@ -44,7 +65,7 @@
   {
     "ContainingType": "CompanyManagement.Controllers.DepartmentController",
     "Method": "DeleteDepartment",
-    "RelativePath": "api/departments/{id}",
+    "RelativePath": "api/Department/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
