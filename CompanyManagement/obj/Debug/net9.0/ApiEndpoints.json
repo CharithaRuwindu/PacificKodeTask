@@ -1,16 +1,6 @@
 [
   {
     "ContainingType": "CompanyManagement.Controllers.DepartmentController",
-    "Method": "GetDepartments",
-    "RelativePath": "api/Department",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CompanyManagement.Controllers.DepartmentController",
     "Method": "CreateDepartment",
     "RelativePath": "api/Department",
     "HttpMethod": "POST",
@@ -27,6 +17,16 @@
   },
   {
     "ContainingType": "CompanyManagement.Controllers.DepartmentController",
+    "Method": "GetAllDepartments",
+    "RelativePath": "api/Department",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CompanyManagement.Controllers.DepartmentController",
     "Method": "GetDepartmentById",
     "RelativePath": "api/Department/{id}",
     "HttpMethod": "GET",
@@ -35,7 +35,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -51,11 +51,11 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
-        "Name": "department",
+        "Name": "updatedDepartment",
         "Type": "CompanyManagement.Models.Department",
         "IsRequired": true
       }
@@ -72,7 +72,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],

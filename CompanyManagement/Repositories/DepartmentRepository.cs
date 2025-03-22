@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CompanyManagement.Data;
@@ -16,12 +17,15 @@ namespace CompanyManagement.Repositories
             _context = context;
         }
 
-        public async Task<List<Department>> GetDepartmentsAsync() => await _context.Departments.ToListAsync();
+        public async Task<List<Department>> GetDepartmentsAsync() =>
+            await _context.Departments.ToListAsync();
 
-        public async Task<Department> GetDepartmentByIdAsync(int id) => await _context.Departments.FindAsync(id);
+        public async Task<Department> GetDepartmentByIdAsync(Guid id) =>
+            await _context.Departments.FindAsync(id);
 
         public async Task AddDepartmentAsync(Department department)
         {
+            department.Id = Guid.NewGuid();
             _context.Departments.Add(department);
             await _context.SaveChangesAsync();
         }
@@ -32,7 +36,7 @@ namespace CompanyManagement.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteDepartmentAsync(int id)
+        public async Task DeleteDepartmentAsync(Guid id)
         {
             var department = await _context.Departments.FindAsync(id);
             if (department != null)

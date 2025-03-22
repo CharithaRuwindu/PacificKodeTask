@@ -171,3 +171,4 @@ E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\refin
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\CompanyManagement.pdb
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\CompanyManagement.genruntimeconfig.cache
 E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\ref\CompanyManagement.dll
+E:\personal project\pacifickode\Company\CompanyManagement\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

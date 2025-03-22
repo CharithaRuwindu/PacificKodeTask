@@ -29,7 +29,7 @@ namespace CompanyManagement.Models
         public decimal Salary { get; set; }
 
         [Required]
-        public int DepartmentId { get; set; }
+        public Guid DepartmentId { get; set; }
 
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }

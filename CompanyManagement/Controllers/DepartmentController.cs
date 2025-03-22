@@ -59,11 +59,27 @@ namespace CompanyManagement.Controllers
             if (existingDepartment == null)
                 return NotFound();
 
-            if (await _context.Departments.AnyAsync(d => d.DepartmentCode == updatedDepartment.DepartmentCode && d.Id != id))
-                return Conflict("Department Code already exists.");
+            bool isCodeChanged = existingDepartment.DepartmentCode != updatedDepartment.DepartmentCode;
+            bool isNameChanged = existingDepartment.DepartmentName != updatedDepartment.DepartmentName;
 
-            if (await _context.Departments.AnyAsync(d => d.DepartmentName == updatedDepartment.DepartmentName && d.Id != id))
-                return Conflict("Department Name already exists.");
+            if (isCodeChanged && !isNameChanged) // Only DepartmentCode changed
+            {
+                if (await _context.Departments.AnyAsync(d => d.DepartmentCode == updatedDepartment.DepartmentCode && d.Id != id))
+                    return Conflict("Department Code already exists.");
+            }
+            else if (!isCodeChanged && isNameChanged) // Only DepartmentName changed
+            {
+                if (await _context.Departments.AnyAsync(d => d.DepartmentName == updatedDepartment.DepartmentName && d.Id != id))
+                    return Conflict("Department Name already exists.");
+            }
+            else if (isCodeChanged && isNameChanged) // Both changed
+            {
+                if (await _context.Departments.AnyAsync(d => d.DepartmentCode == updatedDepartment.DepartmentCode && d.Id != id))
+                    return Conflict("Department Code already exists.");
+
+                if (await _context.Departments.AnyAsync(d => d.DepartmentName == updatedDepartment.DepartmentName && d.Id != id))
+                    return Conflict("Department Name already exists.");
+            }
 
             existingDepartment.DepartmentCode = updatedDepartment.DepartmentCode;
             existingDepartment.DepartmentName = updatedDepartment.DepartmentName;
@@ -71,6 +87,7 @@ namespace CompanyManagement.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDepartment(Guid id)
