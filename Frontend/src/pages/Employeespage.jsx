@@ -67,6 +67,15 @@ const EmployeesPage = () => {
     setSelectedEmployee(null); 
     setEditModalOpen(true);
   };
+
+  const refreshData = () => {
+    if (typeof fetchData === 'function') {
+      fetchData();
+    } else {
+      
+      window.location.reload();
+    }
+  };
   
   const handleEmployeeSaved = () => {
     if (typeof refetch === 'function') {
@@ -78,7 +87,9 @@ const EmployeesPage = () => {
       : 'Employee added successfully';
     
     setAlertMessage(successMessage);
-    
+    setTimeout(() => {
+      refreshData();
+  }, 1500);
     setAlertOpen(true);
   };
   

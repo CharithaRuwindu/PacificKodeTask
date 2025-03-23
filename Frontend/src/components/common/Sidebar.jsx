@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   Drawer, 
   List, 
@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 import BusinessIcon from '@mui/icons-material/Business';
 import PeopleIcon from '@mui/icons-material/People';
-import { useAppContext } from '../../context/AppContext';
 
 const drawerWidth = 240;
 
@@ -33,16 +32,14 @@ const StyledListItem = styled(ListItem)(({ theme, active }) => ({
   '&:hover': {
     backgroundColor: active ? theme.palette.action.selected : theme.palette.action.hover,
   },
+  cursor: 'pointer',
 }));
 
 const Sidebar = () => {
   const theme = useTheme();
-  const { activePage, setActivePage } = useAppContext();
-  
-  const handleNavigation = (page) => {
-    setActivePage(page);
-  };
-  
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <Drawer
       variant="permanent"
@@ -62,34 +59,31 @@ const Sidebar = () => {
       <Divider />
       <List sx={{ py: 2 }}>
         <StyledListItem
-          button
-          active={activePage === 'departments' ? 1 : 0}
-          onClick={() => handleNavigation('departments')}
-          sx={{ cursor: 'pointer' }}
+          active={location.pathname === '/departments'}
+          onClick={() => navigate('/departments')}
         >
           <ListItemIcon>
-            <BusinessIcon color={activePage === 'departments' ? 'primary' : 'inherit'} />
+            <BusinessIcon color={location.pathname === '/departments' ? 'primary' : 'inherit'} />
           </ListItemIcon>
           <ListItemText 
             primary="Departments" 
             primaryTypographyProps={{ 
-              fontWeight: activePage === 'departments' ? 'bold' : 'regular' 
+              fontWeight: location.pathname === '/departments' ? 'bold' : 'regular' 
             }}
           />
         </StyledListItem>
+
         <StyledListItem
-          button
-          active={activePage === 'employees' ? 1 : 0}
-          onClick={() => handleNavigation('employees')}
-          sx={{ cursor: 'pointer' }}
+          active={location.pathname === '/employees'}
+          onClick={() => navigate('/employees')}
         >
           <ListItemIcon>
-            <PeopleIcon color={activePage === 'employees' ? 'primary' : 'inherit'} />
+            <PeopleIcon color={location.pathname === '/employees' ? 'primary' : 'inherit'} />
           </ListItemIcon>
           <ListItemText 
             primary="Employees" 
             primaryTypographyProps={{ 
-              fontWeight: activePage === 'employees' ? 'bold' : 'regular' 
+              fontWeight: location.pathname === '/employees' ? 'bold' : 'regular' 
             }}
           />
         </StyledListItem>
