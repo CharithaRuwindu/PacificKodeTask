@@ -6,6 +6,17 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddSingleton(new SqlConnection(connectionString));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowViteApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddScoped<EmployeeRepository>();
 
 builder.Services.AddControllers();
@@ -21,6 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowViteApp");
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
